@@ -1,0 +1,61 @@
+﻿@model ShipperViewModel
+
+@{
+    ViewData["Title"] = "Shippers";
+}
+
+<div class="container p-3">
+    <div class = "row pt-4">
+        <div class = "col-6">
+            <h3 class="text-primary">Shippers</h3>
+        </div>
+        <div class = "col-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
+    <hr />
+        <table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Shipper.ShipperName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Shipper.ShipperPhone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Shippers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipperName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipperPhone)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-secondary" href="/Shipper/Update?shipperId=@item.ShipperId">Edit</a>
+                <a class="btn btn-info" href="/Shipper/Details?shipperId=@item.ShipperId">View</a>
+                <a class="btn btn-danger" href="/Shipper/Delete?shipperId=@item.ShipperId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    </div>
+
+<style>
+    tr.even {
+    background-color: #F5F5F5 !important;
+}
+</style>
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable()
+        });
+    </script>
+}

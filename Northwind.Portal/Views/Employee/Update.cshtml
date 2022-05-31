@@ -1,0 +1,108 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Update</h1>
+
+<hr />
+<p>All fields marked with an asterix are required.</p>
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4 form-group d-none">
+                    <label asp-for="Employee.EmployeeId" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeId" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeId" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeLastName" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeLastName" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeLastName" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeFirstName" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeFirstName" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeFirstName" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeTitle" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeTitle" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeTitle" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeTitleOfCourtesy" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeTitleOfCourtesy" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeTitleOfCourtesy" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeBirthDate" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeBirthDate" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeBirthDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeHireDate" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeHireDate" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeHireDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeExtension" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeExtension" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeExtension" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeNotes" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeNotes" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeNotes" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeSupervisorId" class="control-label"></label><br />
+                    <select asp-for="Employee.EmployeeSupervisorId" 
+                        asp-items="@(new SelectList(Model.Employees, nameof(EmployeeDto.EmployeeId), nameof(EmployeeDto.EmployeeFullName)))">
+                        <option>Please select one</option>
+                    </select>
+                    <span asp-validation-for="Employee.EmployeeSupervisorId" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeAddress" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeAddress" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeAddress" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeCity" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeCity" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeCity" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.RegionId" class="control-label"></label><br />
+                    <select asp-for="Employee.RegionId" 
+                        asp-items="@(new SelectList(Model.Regions, nameof(RegionDto.RegionId), nameof(RegionDto.RegionDescription)))">
+                        <option>Please select one</option>
+                    </select>
+                    <span asp-validation-for="Employee.RegionId" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeePostalCode" class="control-label"></label>
+                    <input asp-for="Employee.EmployeePostalCode" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeePostalCode" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeeCountry" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeCountry" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeeCountry" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Employee.EmployeePhone" class="control-label"></label>
+                    <input asp-for="Employee.EmployeePhone" class="form-control" />
+                    <span asp-validation-for="Employee.EmployeePhone" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" /> |
+                 <a class="btn btn-danger" type="button" asp-action="Index">Cancel</a>
+            </div> 
+        </form>
+

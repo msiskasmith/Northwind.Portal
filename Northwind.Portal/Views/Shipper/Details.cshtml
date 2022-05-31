@@ -1,0 +1,29 @@
+﻿@model Northwind.DataModels.ShipperDto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>View Shipping Company</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShipperName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShipperName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ShipperPhone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ShipperPhone)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" href="/Shipper/Update?shipperId=@Model.ShipperId">Edit</a> 
+    <a class="btn btn-danger" asp-action="Index">Back</a>
+</div>

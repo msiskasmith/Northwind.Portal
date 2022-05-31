@@ -1,0 +1,34 @@
+﻿@model ProductCategoryViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h3>Update Product Category</h3>
+<hr />
+<p>All fields marked with an asterix are required.</p>
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4 form-group d-none">
+                    <label asp-for="ProductCategory.ProductCategoryId" class="control-label"></label>
+                    <input asp-for="ProductCategory.ProductCategoryId" class="form-control" />
+                    <span asp-validation-for="ProductCategory.ProductCategoryId" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="ProductCategory.ProductCategoryName" class="control-label"></label>
+                    <input asp-for="ProductCategory.ProductCategoryName" class="form-control" />
+                    <span asp-validation-for="ProductCategory.ProductCategoryName" class="text-danger"></span>
+                </div>
+                <div class="col-md-12 form-group">
+                    <label asp-for="ProductCategory.ProductCategoryDescription" class="control-label"></label>
+                    <textarea asp-for="ProductCategory.ProductCategoryDescription" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="ProductCategory.ProductCategoryDescription" class="text-danger"></span>
+                </div>       
+            </div>   
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                 <a class="btn btn-secondary" type="button" asp-action="Index">Cancel</a>
+            </div> 
+        </form>
+

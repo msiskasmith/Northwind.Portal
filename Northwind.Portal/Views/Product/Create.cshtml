@@ -1,0 +1,76 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h>Add a product</h>
+
+<hr />
+<p>All fields marked with an asterix are required.</p>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label asp-for="Product.ProductName" class="control-label"></label>
+                    <input asp-for="Product.ProductName" class="form-control" />
+                    <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+                </div>
+                   <div class="col-md-4 form-group">
+                    <label class="control-label">Supplier</label><br />
+                    <select asp-for="Product.SupplierId" 
+                        asp-items="@(new SelectList(Model.Suppliers, nameof(SupplierDto.SupplierId), nameof(SupplierDto.SupplierName)))">
+                        <option>Please select one</option>
+                    </select>
+                    <span asp-validation-for="Product.SupplierId" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label class="control-label">ProductCategory</label><br />
+                    <select asp-for="Product.ProductCategoryId" 
+                        asp-items="@(new SelectList(Model.ProductCategories, nameof(ProductCategoryDto.ProductCategoryId), nameof(ProductCategoryDto.ProductCategoryName)))">
+                        <option>Please select one</option>
+                    </select>
+                    <span asp-validation-for="Product.ProductCategoryId" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Product.ProductQuantityPerUnit" class="control-label"></label>
+                    <input asp-for="Product.ProductQuantityPerUnit" class="form-control" />
+                    <span asp-validation-for="Product.ProductQuantityPerUnit" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Product.ProductUnitPrice" class="control-label"></label>
+                    <input asp-for="Product.ProductUnitPrice" class="form-control" />
+                    <span asp-validation-for="Product.ProductUnitPrice" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Product.ProductUnitsInStock" class="control-label"></label>
+                    <input asp-for="Product.ProductUnitsInStock" class="form-control" />
+                    <span asp-validation-for="Product.ProductUnitsInStock" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Product.ProductUnitsOnOrder" class="control-label"></label>
+                    <input asp-for="Product.ProductUnitsOnOrder" class="form-control" />
+                    <span asp-validation-for="Product.ProductUnitsOnOrder" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Product.ProductReorderLevel" class="control-label"></label>
+                    <input asp-for="Product.ProductReorderLevel" class="form-control" />
+                    <span asp-validation-for="Product.ProductReorderLevel" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Product.ProductDiscontinued" class="control-label"></label><br />
+                            <select asp-for="Product.ProductDiscontinued" class="custom-select">  
+                                <option value="0">No</option>  
+                                <option value="1">Yes</option>  
+                            </select>
+                    <span asp-validation-for="Product.ProductDiscontinued" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" /> 
+                 <a class="btn btn-secondary" type="button" asp-action="Index">Cancel</a>
+            </div>
+        </form>
+
+

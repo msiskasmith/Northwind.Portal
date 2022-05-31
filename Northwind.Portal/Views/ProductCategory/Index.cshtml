@@ -1,0 +1,61 @@
+﻿@model ProductCategoryViewModel
+
+@{
+    ViewData["Title"] = "Categories";
+}
+<div class="container p-3">
+    <div class = "row pt-4">
+        <div class = "col-6">
+            <h3 class="text-primary">Product Categories</h3>
+        </div>
+        <div class = "col-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div> 
+    <hr />
+        <table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCategory.ProductCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductCategory.ProductCategoryDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ProductCategories) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCategoryDescription)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-secondary" href="/ProductCategory/Update?productCategoryId=@item.ProductCategoryId">Edit</a>
+                <a class="btn btn-info" href="/ProductCategory/Details?productCategoryId=@item.ProductCategoryId">View</a>
+                <a class="btn btn-danger" href="/ProductCategory/Delete?productCategoryId=@item.ProductCategoryId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    </div>
+    
+
+
+<style>
+    tr.even {
+    background-color: #F5F5F5 !important;
+}
+</style>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable()
+        });
+    </script>
+}

@@ -1,0 +1,57 @@
+﻿@model CustomerViewModel
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<div class="container p-3">
+    <div class = "row pt-4">
+        <div class = "col-6">
+            <h3 class="text-primary">Customers</h3>
+        </div>
+        <div class = "col-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div> 
+    <hr />
+             <table id="myTable" class="table mw-100">
+                <thead>
+                    <tr>              
+                        <th>@Html.DisplayNameFor(@model => model.Customer.CustomerName)</th>
+                        <th>@Html.DisplayNameFor(@model => model.Customer.CustomerContactName)</th>
+                        <th>@Html.DisplayNameFor(@model => model.Customer.CustomerCountry)</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.Customers)
+                    {
+                    <tr>
+                       <td class="px-4"> @Html.DisplayFor(modelItem => item.CustomerName)</td>
+                       <td class="px-4"> @Html.DisplayFor(modelItem => item.CustomerContactName)</td>
+                       <td class="px-4"> @Html.DisplayFor(modelItem => item.CustomerCountry)</td>
+               
+                       <td class="text-right">
+                            <a class="btn btn-secondary" href="/Customer/Update?customerId=@item.CustomerId">Edit</a>
+                            <a class="btn btn-info" href="/Customer/Details?customerId=@item.CustomerId">View</a>
+                            <a class="btn btn-danger" href="/Customer/Delete?customerId=@item.CustomerId">Delete</a>
+                        </td>
+                       </tr>
+                    }
+                </tbody>
+            </table>
+ </div>
+
+<style>
+    tr.even {
+    background-color: #F5F5F5 !important;
+}
+</style>
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable()
+        });
+    </script>
+}

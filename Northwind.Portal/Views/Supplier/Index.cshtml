@@ -1,0 +1,68 @@
+﻿@model SupplierViewModel
+
+@{
+    ViewData["Title"] = "Supplier";
+}
+
+<div class="container p-3">
+    <div class = "row pt-4">
+        <div class = "col-6">
+            <h3 class="text-primary">Suppliers</h3>
+        </div>
+        <div class = "col-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+        
+    </div>
+    <hr />
+        <table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier.SupplierName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier.SupplierContactName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supplier.SupplierCountry)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Suppliers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SupplierCountry)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-secondary" href="/Supplier/Update?supplierId=@item.SupplierId">Edit</a>
+                <a class="btn btn-info" href="/Supplier/Details?supplierId=@item.SupplierId">View</a>
+                <a class="btn btn-danger" href="/Supplier/Delete?supplierId=@item.SupplierId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    </div>
+
+<style>
+    tr.even {
+    background-color: #F5F5F5 !important;
+}
+</style>
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable()
+        });
+    </script>
+}

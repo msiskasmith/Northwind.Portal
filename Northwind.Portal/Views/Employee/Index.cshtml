@@ -1,0 +1,68 @@
+﻿@model EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="container p-3">
+
+    <div class = "row pt-4">
+        <div class = "col-6">
+            <h3 class="text-primary">Employees</h3>
+        </div>
+        <div class = "col-6 text-right">
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div> 
+    <hr />
+        <table id="myTable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee.EmployeeFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee.EmployeeLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee.EmployeeTitle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Employees) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeLastName)
+            </td>         
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeTitle)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-secondary" href="/Employee/Update?employeeId=@item.EmployeeId">Edit</a>
+                <a class="btn btn-info" href="/Employee/Details?employeeId=@item.EmployeeId">View</a>
+                <a class="btn btn-danger" href="/Employee/Delete?employeeId=@item.EmployeeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    </div>
+
+<style>
+    tr.even {
+    background-color: #F5F5F5 !important;
+}
+</style>
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable()
+        });
+    </script>
+}
