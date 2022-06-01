@@ -1,4 +1,5 @@
 ﻿using Northwind.DataModels;
+using Northwind.DataModels.Employees;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;

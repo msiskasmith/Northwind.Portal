@@ -1,19 +1,20 @@
 ﻿@model OrderDetailsViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add Order";
 }
 
 <h3>Add an Order Detail</h3>
 <hr />
 <p>All fields marked with an asterix are required.</p>
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @await Html.PartialAsync("_ModelStateErrorsPartial")
+
             <div class="row">
                 <div class="col-md-4 form-group d-none">
                     <label asp-for="OrderDetail.OrderId" class="control-label"></label>
                     <input asp-for="OrderDetail.OrderId" class="form-control" />
-                    <span asp-validation-for="OrderDetail.OrderId" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="OrderDetail.Product.ProductName" class="control-label"></label><br />
@@ -21,22 +22,18 @@
                         asp-items="@(new SelectList(Model.Products, nameof(ProductDto.ProductId), nameof(ProductDto.ProductName)))">
                         <option>Please select one</option>
                     </select>
-                    <span asp-validation-for="OrderDetail.Product.ProductName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="OrderDetail.OrderUnitPrice" class="control-label"></label>
                     <input asp-for="OrderDetail.OrderUnitPrice" class="form-control" />
-                    <span asp-validation-for="OrderDetail.OrderUnitPrice" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="OrderDetail.OrderQuantity" class="control-label"></label>
                     <input asp-for="OrderDetail.OrderQuantity" class="form-control" />
-                    <span asp-validation-for="OrderDetail.OrderQuantity" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="OrderDetail.OrderDiscount" class="control-label"></label>
                     <input asp-for="OrderDetail.OrderDiscount" class="form-control" />
-                    <span asp-validation-for="OrderDetail.OrderDiscount" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">

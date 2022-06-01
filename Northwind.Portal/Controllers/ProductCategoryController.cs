@@ -79,12 +79,12 @@ namespace Northwind.Portal.Controllers
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Product Category Not Added", NotificationType.error);
 
-                return View(productCategoryViewModel);
+                CreateObjectCookie("ProductCategoryDtoCookie", productCategoryViewModel.ProductCategory);
+
+                return Redirect("/ProductCategory/Create");
             }
 
-            CreateObjectCookie("ProductCategoryDtoCookie", productCategoryViewModel.ProductCategory);
-
-            return Redirect("/ProductCategory/Create");
+            return View(productCategoryViewModel);
         }
 
         public async Task<IActionResult> Update([FromQuery] short productCategoryId)
@@ -115,10 +115,13 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Product Category Update Failed", NotificationType.error);
+
+                return Redirect(
+                $"/ProductCategory/Update?productCategoryId={productCategoryViewModel.ProductCategory.ProductCategoryId}");
             }
 
-            return Redirect(
-                $"/ProductCategory/Update?productCategoryId={productCategoryViewModel.ProductCategory.ProductCategoryId}");
+            return View(productCategoryViewModel);
+            
         }
 
         public async Task<IActionResult> Delete([FromQuery] short productCategoryId)

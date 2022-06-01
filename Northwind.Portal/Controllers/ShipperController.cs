@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Northwind.DataModels;
+using Northwind.DataModels.Shipment;
 using Northwind.Portal.DataAccess;
 using Northwind.Portal.Models;
 using System.Collections.Generic;
@@ -75,11 +76,13 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Shipper Not Added", NotificationType.error);
+
+                CreateObjectCookie("ShipperDtoCookie", shipperViewModel.Shipper);
+
+                return Redirect("/Shipper/Create");
             }
 
-            CreateObjectCookie("ShipperDtoCookie", shipperViewModel.Shipper);
-
-            return Redirect("/Shipper/Create");
+            return View(shipperViewModel);
         }
 
         public async Task<IActionResult> Update([FromQuery] short shipperId)
@@ -110,9 +113,11 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Shipper Update Failed", NotificationType.error);
+
+                return Redirect($"/Shipper/Update?shipperId={shipperViewModel.Shipper.ShipperId}");
             };
 
-            return Redirect($"/Shipper/Update?shipperId={shipperViewModel.Shipper.ShipperId}");
+            return View(shipperViewModel);
         }
 
         public async Task<IActionResult> Delete([FromQuery] short shipperId)

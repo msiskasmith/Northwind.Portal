@@ -61,14 +61,7 @@ namespace Northwind.Portal.Controllers
         [ActionName("Create")]
         public async Task<IActionResult> Create()
         {
-            var orderViewModel = new OrderViewModel()
-            {
-                Order = GetOrderObject(),
-                ShipRegions = await _regionData.GetRegionsAsync(),
-                Employees = await _employeeData.GetEmployeesAsync(),
-                Customers = await _customerData.GetCustomersAsync(),
-                Shippers = await _shipperData.GetShippersAsync()
-            };
+            var orderViewModel = await GetOrderViewModel();
 
             return View(orderViewModel);
         }
@@ -92,24 +85,21 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Order Not Added", NotificationType.error);
+
+                CreateObjectCookie("OrderDtoCookie", orderViewModel.Order);
+
+                return Redirect("/Order/Create");
             }
 
-            CreateObjectCookie("OrderDtoCookie", orderViewModel.Order);
+            orderViewModel = await GetOrderViewModel(orderViewModel.Order);
 
-            return Redirect("/Order/Create");
+            return View(orderViewModel);
         }
 
         public async Task<IActionResult> Update([FromQuery] short orderId)
         {
-            var orderViewModel = new OrderViewModel()
-            {
-                Order = await _orderData.GetOrderAsync(orderId),
-                ShipRegions = await _regionData.GetRegionsAsync(),
-                Employees = await _employeeData.GetEmployeesAsync(),
-                Customers = await _customerData.GetCustomersAsync(),
-                Shippers = await _shipperData.GetShippersAsync()
-            };
-
+            var orderViewModel = await GetOrderViewModel(await _orderData.GetOrderAsync(orderId));
+            
             return View(orderViewModel);
         }
 
@@ -131,9 +121,14 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Order Update Failed", NotificationType.error);
+
+                return Redirect($"/Order/Update?orderId={orderViewModel.Order.OrderId}");
             }
 
-            return Redirect($"/Order/Update?orderId={orderViewModel.Order.OrderId}");
+            orderViewModel = await GetOrderViewModel(orderViewModel.Order);
+
+            return View(orderViewModel);
+            
         }
 
         public async Task<IActionResult> Delete([FromQuery] short orderId)
@@ -172,6 +167,25 @@ namespace Northwind.Portal.Controllers
                 "OrderDtoCookie", orderDto);
 
             return orderDto;
+        }
+
+        public async Task<OrderViewModel> GetOrderViewModel(OrderDto order = null)
+        {
+            if (order == null)
+            {
+                order = GetOrderObject();
+            }
+
+            var orderViewModel = new OrderViewModel()
+            {
+                Order = order,
+                ShipRegions = await _regionData.GetRegionsAsync(),
+                Employees = await _employeeData.GetEmployeesAsync(),
+                Customers = await _customerData.GetCustomersAsync(),
+                Shippers = await _shipperData.GetShippersAsync()
+            };
+
+            return orderViewModel;
         }
     }
 }

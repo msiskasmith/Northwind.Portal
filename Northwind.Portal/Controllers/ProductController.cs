@@ -56,12 +56,7 @@ namespace Northwind.Portal.Controllers
         [ActionName("Create")]
         public async Task<IActionResult> Create()
         {
-            var productViewModel = new ProductViewModel()
-            {
-                Product = GetProductObject(),
-                Suppliers = await _supplierData.GetSuppliersAsync(),
-                ProductCategories = await _productCategoryData.GetProductCategoriesAsync()
-            };
+            var productViewModel = await GetProductViewModel();
 
             return View(productViewModel);
         }
@@ -69,8 +64,6 @@ namespace Northwind.Portal.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
         {
-
-
             if (ModelState.IsValid)
             {
                 var client = _httpClientFactory.CreateClient("northwindconnection");
@@ -87,11 +80,15 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Product Not Added", NotificationType.error);
+
+                CreateObjectCookie("ProductDtoCookie", productViewModel.Product);
+
+                return Redirect("/Product/Create");
             }
 
-            CreateObjectCookie("ProductDtoCookie", productViewModel.Product);
-
-            return Redirect("/Product/Create");
+            productViewModel = await GetProductViewModel(productViewModel.Product);
+            
+            return View(productViewModel);  
         }
 
         public async Task<IActionResult> Update([FromQuery] short productId)
@@ -124,9 +121,13 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result,
                 "Product Updated Failed", NotificationType.error);
+
+                return Redirect($"/Product/Update?productId={productViewModel.Product.ProductId}");
             }
 
-            return Redirect($"/Product/Update?productId={productViewModel.Product.ProductId}");
+            productViewModel = await GetProductViewModel(productViewModel.Product);
+
+            return View(productViewModel);
         }
 
         public async Task<IActionResult> Delete([FromQuery] short productId)
@@ -166,6 +167,23 @@ namespace Northwind.Portal.Controllers
                 "ProductDtoCookie", productDto);
 
             return productDto;
+        }
+
+        public async Task<ProductViewModel> GetProductViewModel(ProductDto product = null)
+        {
+            if (product == null)
+            {
+                product = GetProductObject();
+            }
+
+            var productViewModel = new ProductViewModel()
+            {
+                Product = product,
+                Suppliers = await _supplierData.GetSuppliersAsync(),
+                ProductCategories = await _productCategoryData.GetProductCategoriesAsync()
+            };
+
+            return productViewModel;
         }
     }
 }

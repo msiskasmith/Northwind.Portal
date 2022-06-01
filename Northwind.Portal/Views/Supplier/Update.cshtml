@@ -1,7 +1,7 @@
 ﻿@model SupplierViewModel
 
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "Update Supplier Infomation";
 }
 
 <h3>Update Supplier Infomation</h3>
@@ -9,47 +9,41 @@
 <hr />
 <p>All fields marked with an asterix are required.</p>
         <form asp-action="Update">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
+
+            @await Html.PartialAsync("_ModelStateErrorsPartial")         
+            
             <div class="row">
                 <div class="col-md-4 form-group d-none">
                     <label asp-for="Supplier.SupplierId" class="control-label"></label>
                     <input asp-for="Supplier.SupplierId" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierId" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierName" class="control-label"></label>
                     <input asp-for="Supplier.SupplierName" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierHomepage" class="control-label"></label>
                     <input asp-for="Supplier.SupplierHomepage" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierHomepage" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierContactName" class="control-label"></label>
                     <input asp-for="Supplier.SupplierContactName" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierContactName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierContactTitle" class="control-label"></label>
                     <input asp-for="Supplier.SupplierContactTitle" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierContactTitle" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierFax" class="control-label"></label>
                     <input asp-for="Supplier.SupplierFax" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierFax" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierAddress" class="control-label"></label>
                     <input asp-for="Supplier.SupplierAddress" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierAddress" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierCity" class="control-label"></label>
                     <input asp-for="Supplier.SupplierCity" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierCity" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.Region.RegionDescription" class="control-label"></label><br />
@@ -57,22 +51,18 @@
                         asp-items="@(new SelectList(Model.Regions, nameof(RegionDto.RegionId), nameof(RegionDto.RegionDescription)))">
                         <option>Please select one</option>
                     </select>
-                    <span asp-validation-for="Supplier.Region.RegionDescription" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierPostalCode" class="control-label"></label>
                     <input asp-for="Supplier.SupplierPostalCode" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierPostalCode" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierCountry" class="control-label"></label>
                     <input asp-for="Supplier.SupplierCountry" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierCountry" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Supplier.SupplierPhone" class="control-label"></label>
                     <input asp-for="Supplier.SupplierPhone" class="form-control" />
-                    <span asp-validation-for="Supplier.SupplierPhone" class="text-danger"></span>
                 </div>
             </div>
             

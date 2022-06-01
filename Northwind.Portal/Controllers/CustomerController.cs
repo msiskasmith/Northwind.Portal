@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Northwind.DataModels;
+using Northwind.DataModels.Shipment;
 using Northwind.Portal.DataAccess;
 using Northwind.Portal.Models;
 using System.Collections.Generic;
@@ -48,11 +49,7 @@ namespace Northwind.Portal.Controllers
         [ActionName("Create")]
         public async Task<IActionResult> Create()
         {
-            var customerViewModel = new CustomerViewModel()
-            {
-                Customer = GetCustomerObject(),
-                Regions = await _regionData.GetRegionsAsync()
-            };
+            var customerViewModel = await GetCustomerViewModel();
 
             return View(customerViewModel);
         }
@@ -76,11 +73,15 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Customer Not Added", NotificationType.error);
+
+                CreateObjectCookie("CustomerDtoCookie", customerViewModel.Customer);
+
+                return Redirect("/Customer/Create");
             }
 
-            CreateObjectCookie("CustomerDtoCookie", customerViewModel.Customer);
+            customerViewModel = await GetCustomerViewModel(customerViewModel.Customer);
 
-            return Redirect("/Customer/Create");
+            return View(customerViewModel);
         }
 
         public async Task<IActionResult> Update([FromQuery] string customerId)
@@ -112,9 +113,13 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Customer Update Failed", NotificationType.error);
-            }           
 
-            return Redirect($"/Customer/Update?customerId={customerViewModel.Customer.CustomerId}");
+                return Redirect($"/Customer/Update?customerId={customerViewModel.Customer.CustomerId}");
+            }
+
+            customerViewModel = await GetCustomerViewModel(customerViewModel.Customer);
+
+            return View(customerViewModel);
         }
 
         public async Task<IActionResult> Delete([FromQuery] string customerId)
@@ -153,6 +158,23 @@ namespace Northwind.Portal.Controllers
                 "CustomerDtoCookie", customerDto);
 
             return customerDto;
+        }
+
+        public async Task<CustomerViewModel> GetCustomerViewModel(CustomerDto customer = null)
+        {
+            if(customer == null)
+            {
+                customer = GetCustomerObject();
+            }
+
+            var customerViewModel = new CustomerViewModel()
+            {
+                Customer = customer,
+                Regions = await _regionData.GetRegionsAsync(),
+                Customers = await _customerData.GetCustomersAsync(),
+            };
+
+            return customerViewModel;
         }
     }
 }

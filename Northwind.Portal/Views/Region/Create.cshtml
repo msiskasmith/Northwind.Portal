@@ -9,12 +9,13 @@
 <hr />
 <p>All fields marked with an asterix are required.</p>
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @await Html.PartialAsync("_ModelStateErrorsPartial")
+
             <div class="row">
                 <div class="col-md-4 form-group">
                     <label asp-for="Region.RegionDescription" class="control-label"></label>
                     <input asp-for="Region.RegionDescription" class="form-control" />
-                    <span asp-validation-for="Region.RegionDescription" class="text-danger"></span>
                 </div>
             </div>           
             <div class="form-group">

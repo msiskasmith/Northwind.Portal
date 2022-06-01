@@ -9,26 +9,25 @@
 <hr />
 <p>All fields marked with an asterix are required.</p>
         <form asp-action="Update">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @await Html.PartialAsync("_ModelStateErrorsPartial")
+
             <div class="row">
                 <div class="col-md-4 form-group d-none">
                     <label asp-for="Shipper.ShipperId" class="control-label"></label>
                     <input asp-for="Shipper.ShipperId" class="form-control" />
-                    <span asp-validation-for="Shipper.ShipperId" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Shipper.ShipperName" class="control-label"></label>
                     <input asp-for="Shipper.ShipperName" class="form-control" />
-                    <span asp-validation-for="Shipper.ShipperName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Shipper.ShipperPhone" class="control-label"></label>
                     <input asp-for="Shipper.ShipperPhone" class="form-control" />
-                    <span asp-validation-for="Shipper.ShipperPhone" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" /> |
+                <input type="submit" value="Save" class="btn btn-primary" />
                  <a class="btn btn-danger" type="button" asp-action="Index">Cancel</a>
             </div>
         </form>

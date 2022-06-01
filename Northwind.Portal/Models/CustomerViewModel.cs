@@ -1,4 +1,6 @@
 ﻿using Northwind.DataModels;
+using Northwind.DataModels.Location;
+using Northwind.DataModels.Shipment;
 using System.Collections.Generic;
 
 namespace Northwind.Portal.Models

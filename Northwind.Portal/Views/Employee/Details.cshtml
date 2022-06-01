@@ -1,4 +1,4 @@
-﻿@model Northwind.DataModels.EmployeeDto
+﻿@model Northwind.DataModels.Employees.EmployeeDto
 
 @{
     ViewData["Title"] = "Details";
@@ -51,12 +51,6 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.EmployeeExtension)
         </dd>
-@*        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmployeePhoto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmployeePhoto)
-        </dd>*@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.EmployeeNotes)
         </dt>

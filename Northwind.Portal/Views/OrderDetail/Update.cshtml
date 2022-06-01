@@ -1,7 +1,7 @@
 ﻿@model OrderDetailsViewModel
 
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "Update Order";
 }
 
 <h1>Update Order</h1>
@@ -12,39 +12,35 @@
 
     <div class="col-md-4">
         <form asp-action="Update">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @await Html.PartialAsync("_ModelStateErrorsPartial")
+
             <div class="form-group d-none">
                 <label asp-for="OrderDetail.OrderId" class="control-label"></label>
                 <input asp-for="OrderDetail.OrderId" class="form-control" />
-                <span asp-validation.for="OrderDetail.OrderId" class="text-danger"></span>
             </div>
             <div class="form-group d-none">
                 <label asp-for="OrderDetail.OrderDetailId" class="control-label"></label>
                 <input asp-for="OrderDetail.OrderDetailId" class="form-control" />
-                <span asp-validation.for="OrderDetail.OrderDetailId" class="text-danger"></span>
             </div>
             <div class="col-md-4 form-group">
                     <label asp-for="OrderDetail.Product.ProductName" class="control-label"></label><br />
                     <select asp-for="OrderDetail.ProductId" 
                         asp-items="@(new SelectList(Model.Products, nameof(ProductDto.ProductId), nameof(ProductDto.ProductName)))">
-                        <option>Please select one</option>
+                        <option value = null>Please select one</option>
                     </select>
-                    <span asp-validation-for="OrderDetail.Product.ProductName" class="text-danger"></span>
                 </div>
             <div class="form-group">
                 <label asp-for="OrderDetail.OrderUnitPrice" class="control-label"></label>
                 <input asp-for="OrderDetail.OrderUnitPrice" class="form-control" />
-                <span asp-validation.for="OrderDetail.OrderUnitPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OrderDetail.OrderQuantity" class="control-label"></label>
                 <input asp-for="OrderDetail.OrderQuantity" class="form-control" />
-                <span asp-validation.for="OrderDetail.OrderQuantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OrderDetail.OrderDiscount" class="control-label"></label>
                 <input asp-for="OrderDetail.OrderDiscount" class="form-control" />
-                <span asp-validation.for="OrderDetail.OrderDiscount" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary"/>

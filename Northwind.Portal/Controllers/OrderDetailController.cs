@@ -55,13 +55,7 @@ namespace Northwind.Portal.Controllers
         [ActionName("Create")]
         public async Task<IActionResult> Create([FromQuery] short orderId)
         {
-            var orderDetailViewModel = new OrderDetailsViewModel()
-            {
-                OrderDetail = GetOrderDetailObject(),
-                Products = await _productData.GetProductsAsync()
-            };
-
-            orderDetailViewModel.OrderDetail.OrderId = orderId;
+            var orderDetailViewModel = await GetOrderDetailViewModel(orderId: orderId);
 
             return View(orderDetailViewModel);
         }
@@ -86,11 +80,15 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Order Detail Not Added", NotificationType.error);
+
+                CreateObjectCookie("OrderDetailDtoCookie", orderDetailViewModel.OrderDetail);
+
+                return Redirect($"/OrderDetail/Create?orderId={orderDetailViewModel.OrderDetail.OrderId}");
             }
 
-            CreateObjectCookie("OrderDetailDtoCookie", orderDetailViewModel.OrderDetail);
+            orderDetailViewModel = await GetOrderDetailViewModel(orderDetailViewModel.OrderDetail);
 
-            return Redirect($"/OrderDetail/Create?orderId={orderDetailViewModel.OrderDetail.OrderId}");
+            return View(orderDetailViewModel);
         }
 
         public async Task<IActionResult> Update([FromQuery] short orderDetailId)
@@ -122,9 +120,12 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result,
                 "Order Detail Update Failed", NotificationType.error);
+
+                return Redirect($"/OrderDetail/Update?orderDetailId={orderDetailViewModel.OrderDetail.OrderDetailId}");
             }
 
-            return Redirect($"/OrderDetail/Update?orderDetailId={orderDetailViewModel.OrderDetail.OrderDetailId}");
+            orderDetailViewModel = await GetOrderDetailViewModel(orderDetailViewModel.OrderDetail);
+            return View(orderDetailViewModel);
         }
 
         public async Task<IActionResult> Delete([FromQuery] short orderDetailId)
@@ -155,14 +156,35 @@ namespace Northwind.Portal.Controllers
             return Redirect("/OrderDetail/Index");
         }
 
-        public OrderDetailDto GetOrderDetailObject()
+        public OrderDetailDto GetOrderDetailObject(short orderId = 0)
         {
             var orderDetailDto = new OrderDetailDto();
 
             orderDetailDto = GetObjectCookie<OrderDetailDto>(_httpContextAccessor,
                 "OrderDetailDtoCookie", orderDetailDto);
 
+            if(orderId != 0)
+            {
+                orderDetailDto.OrderId = orderId;
+            }
+
             return orderDetailDto;
+        }
+
+        public async Task<OrderDetailsViewModel> GetOrderDetailViewModel(OrderDetailDto orderDetail = null, short orderId = 0)
+        {
+            if (orderDetail == null)
+            {
+                orderDetail = GetOrderDetailObject(orderId);
+            }
+
+            var orderDetailViewModel = new OrderDetailsViewModel()
+            {
+                OrderDetail = orderDetail,
+                Products = await _productData.GetProductsAsync()
+            };
+
+            return orderDetailViewModel;
         }
     }
 }

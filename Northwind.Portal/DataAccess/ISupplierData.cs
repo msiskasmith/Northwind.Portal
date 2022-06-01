@@ -1,4 +1,5 @@
 ﻿using Northwind.DataModels;
+using Northwind.DataModels.Products;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

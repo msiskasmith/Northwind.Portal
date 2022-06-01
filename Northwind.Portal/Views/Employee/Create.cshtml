@@ -1,98 +1,95 @@
 ﻿@model EmployeeViewModel
 
 @{
-    ViewData["Title"] = "Save";
+    ViewData["Title"] = "Add Employee";
 }
 
 <h3>Add an Employee</h3>
 
 <hr />
 <p>All fields marked with an asterix are required.</p>
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Create">            
+            @await Html.PartialAsync("_ModelStateErrorsPartial")
+
             <div class="row">
                 <div class="col-md-4 form-group">
-                    <label asp-for="Employee.EmployeeLastName" class="control-label"></label>
+                    <label asp-for="Employee.EmployeeLastName" class="control-label">Last Name<span class="text-danger">*</span></label>
                     <input asp-for="Employee.EmployeeLastName" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeLastName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Employee.EmployeeFirstName" class="control-label"></label>
+                    <label asp-for="Employee.EmployeeFirstName" class="control-label">First Name<span class="text-danger">*</span></label>
                     <input asp-for="Employee.EmployeeFirstName" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeFirstName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeeTitle" class="control-label"></label>
                     <input asp-for="Employee.EmployeeTitle" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeTitle" class="text-danger"></span>
+                   
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeeTitleOfCourtesy" class="control-label"></label>
                     <input asp-for="Employee.EmployeeTitleOfCourtesy" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeTitleOfCourtesy" class="text-danger"></span>
+                    
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Employee.EmployeeBirthDate" class="control-label"></label>
-                    <input asp-for="Employee.EmployeeBirthDate" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeBirthDate" class="text-danger"></span>
+                    <label asp-for="Employee.EmployeeBirthDate" 
+                    class="control-label">Date of Birth<span class="text-danger">*</span></label>
+                    <input asp-for="Employee.EmployeeBirthDate" id="min-age" class="form-control" />
+                   
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Employee.EmployeeHireDate" class="control-label"></label>
-                    <input asp-for="Employee.EmployeeHireDate" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeHireDate" class="text-danger"></span>
+                    <label asp-for="Employee.EmployeeHireDate" 
+                    class="control-label">Date Hired<span class="text-danger">*</span></label>
+                    <input id="txtToday" asp-for="Employee.EmployeeHireDate" class="form-control" />
+                    
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeeExtension" class="control-label"></label>
                     <input asp-for="Employee.EmployeeExtension" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeExtension" class="text-danger"></span>
+                    
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeeNotes" class="control-label"></label>
                     <input asp-for="Employee.EmployeeNotes" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeNotes" class="text-danger"></span>
+                    
                 </div>
-                <div class="col-md-4 form-group">
-                    <div class="col-md-4 form-group">
+                <div class="col-md-4 form-group">                
                     <label asp-for="Employee.EmployeeSupervisorId" class="control-label"></label><br />
-                    <select asp-for="Employee.EmployeeSupervisorId" 
+                    <select asp-for="Employee.EmployeeSupervisorId" class="form-control"
                         asp-items="@(new SelectList(Model.Employees, nameof(EmployeeDto.EmployeeId), nameof(EmployeeDto.EmployeeFullName)))">
-                        <option>Please select one</option>
-                    </select>
-                    <span asp-validation-for="Employee.EmployeeSupervisorId" class="text-danger"></span>
-                </div>   
+                        <option value = null>Select a supervisor</option>
+                    </select>                      
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeeAddress" class="control-label"></label>
                     <input asp-for="Employee.EmployeeAddress" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeAddress" class="text-danger"></span>
+                    
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeeCity" class="control-label"></label>
                     <input asp-for="Employee.EmployeeCity" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeCity" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Employee.RegionId" class="control-label"></label><br />
-                    <select asp-for="Employee.RegionId" 
+                    <label asp-for="Employee.RegionId" class="control-label">Region<span class="text-danger">*</span></label><br />
+                    <select asp-for="Employee.RegionId" class="form-control"
                         asp-items="@(new SelectList(Model.Regions, nameof(RegionDto.RegionId), nameof(RegionDto.RegionDescription)))">
-                        <option>Please select one</option>
+                        <option value=0>Select a region</option>
                     </select>
-                    <span asp-validation-for="Employee.RegionId" class="text-danger"></span>
+                   
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeePostalCode" class="control-label"></label>
                     <input asp-for="Employee.EmployeePostalCode" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeePostalCode" class="text-danger"></span>
+                    
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeeCountry" class="control-label"></label>
                     <input asp-for="Employee.EmployeeCountry" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeeCountry" class="text-danger"></span>
+                    
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Employee.EmployeePhone" class="control-label"></label>
                     <input asp-for="Employee.EmployeePhone" class="form-control" />
-                    <span asp-validation-for="Employee.EmployeePhone" class="text-danger"></span>
+                    
                 </div>
             </div>
             
@@ -102,3 +99,30 @@
             </div> 
         </form>
 
+
+<script>
+    var dayBefore ='@string.Format("{0:yyyy-MM-dd}", System.DateTime.UtcNow.AddDays(-1))';
+        var tommorowDate ='@string.Format("{0:yyyy-MM-dd}", System.DateTime.UtcNow.AddDays(1))';
+        var minYear = @System.DateTime.UtcNow.AddYears(-100).Year;
+        var maxYear = @System.DateTime.UtcNow.AddYears(-1);
+
+        $('#minimum-age').dropdownDatepicker({
+            defaultDateFormat: 'yyyy-mm-dd',
+	        displayFormat: 'ymd',
+            submitFormat: 'yyyy-mm-dd',
+            minYear: minYear,
+            maxYear: maxYear,
+            defaultDate: tommorowDate,
+            required: true
+        }); 
+        
+        $('#txtToday').dropdownDatepicker({
+            defaultDateFormat: 'yyyy-mm-dd',
+	        displayFormat: 'ymd',
+            submitFormat: 'yyyy-mm-dd',
+            minYear: minYear,
+            maxYear: maxYear,
+            defaultDate: tommorowDate,
+            required: true
+        });
+</script>

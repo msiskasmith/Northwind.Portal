@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Northwind.DataModels;
+using Northwind.DataModels.Location;
 using Northwind.Portal.DataAccess;
 using Northwind.Portal.Models;
 using System.Collections.Generic;
@@ -76,11 +77,13 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Region Not Added", NotificationType.error);
+
+                CreateObjectCookie("RegionDtoCookie", regionViewModel.Region);
+
+                return Redirect("/Region/Create");
             }
 
-            CreateObjectCookie("RegionDtoCookie", regionViewModel.Region);
-
-            return Redirect("/Region/Create");
+            return View(regionViewModel);
         }
 
         public async Task<IActionResult> Update([FromQuery] short regionId)
@@ -112,9 +115,11 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result,
                 "Region Update Failed", NotificationType.error);
+
+                return Redirect($"/Region/Update?regionId={regionViewModel.Region.RegionId}");
             }
 
-            return Redirect($"/Region/Update?regionId={regionViewModel.Region.RegionId}");
+            return View(regionViewModel);
         }
 
         public async Task<IActionResult> Delete([FromQuery] short regionId)

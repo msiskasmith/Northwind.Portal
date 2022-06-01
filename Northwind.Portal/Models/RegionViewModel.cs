@@ -1,4 +1,5 @@
 ﻿using Northwind.DataModels;
+using Northwind.DataModels.Location;
 using System.Collections.Generic;
 
 namespace Northwind.Portal.Models

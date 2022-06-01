@@ -9,13 +9,13 @@
 <hr />
 <p>All fields marked with an asterix are required.</p>
         <form asp-action="Update">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+             @await Html.PartialAsync("_ModelStateErrorsPartial")
 
             <div class="row">
                 <div class="col-md-4 form-group d-none">
                     <label asp-for="Order.OrderId" class="control-label"></label>
                     <input asp-for="Order.OrderId" class="form-control" />
-                    <span asp-validation-for="Order.OrderId" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.Customer.CustomerName" class="control-label"></label><br />
@@ -23,22 +23,18 @@
                         asp-items="@(new SelectList(Model.Customers, nameof(CustomerDto.CustomerId), nameof(CustomerDto.CustomerName)))">
                         <option>Please select one</option>
                     </select>
-                    <span asp-validation-for="Order.Customer.CustomerName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderDate" class="control-label"></label>
                     <input asp-for="Order.OrderDate" class="form-control" />
-                    <span asp-validation-for="Order.OrderDate" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderRequiredDate" class="control-label"></label>
                     <input asp-for="Order.OrderRequiredDate" class="form-control" />
-                    <span asp-validation-for="Order.OrderRequiredDate" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderShippedDate" class="control-label"></label>
                     <input asp-for="Order.OrderShippedDate" class="form-control" />
-                    <span asp-validation-for="Order.OrderShippedDate" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.Shipper" class="control-label"></label><br />
@@ -46,7 +42,6 @@
                         asp-items="@(new SelectList(Model.Shippers, nameof(ShipperDto.ShipperId), nameof(ShipperDto.ShipperName)))">
                         <option>Please select one</option>
                     </select>
-                    <span asp-validation-for="Order.Shipper.ShipperName" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-4 form-group">
@@ -55,7 +50,6 @@
                         asp-items="@(new SelectList(Model.Employees, nameof(EmployeeDto.EmployeeId), nameof(EmployeeDto.EmployeeFirstName)))">
                         <option>Please select one</option>
                     </select>
-                    <span asp-validation-for="Order.Employee.EmployeeFirstName" class="text-danger"></span>
                 </div>
 
                 <div class="col-md-4 form-group">
@@ -66,17 +60,14 @@
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderShipName" class="control-label"></label>
                     <input asp-for="Order.OrderShipName" class="form-control" />
-                    <span asp-validation-for="Order.OrderShipName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderShipAddress" class="control-label"></label>
                     <input asp-for="Order.OrderShipAddress" class="form-control" />
-                    <span asp-validation-for="Order.OrderShipAddress" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderShipCity" class="control-label"></label>
                     <input asp-for="Order.OrderShipCity" class="form-control" />
-                    <span asp-validation-for="Order.OrderShipCity" class="text-danger"></span>
                 </div>
                    <div class="col-md-4 form-group">
                     <label asp-for="Order.ShipRegion.RegionDescription" class="control-label"></label><br />
@@ -84,17 +75,14 @@
                         asp-items="@(new SelectList(Model.ShipRegions, nameof(RegionDto.RegionId), nameof(RegionDto.RegionDescription)))">
                         <option>Please select one</option>
                     </select>
-                    <span asp-validation-for="Order.ShipRegion.RegionDescription" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderShipPostalCode" class="control-label"></label>
                     <input asp-for="Order.OrderShipPostalCode" class="form-control" />
-                    <span asp-validation-for="Order.OrderShipPostalCode" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderShipCountry" class="control-label"></label>
                     <input asp-for="Order.OrderShipCountry" class="form-control" />
-                    <span asp-validation-for="Order.OrderShipCountry" class="text-danger"></span>
                 </div>
             </div>
             

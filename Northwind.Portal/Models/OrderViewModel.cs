@@ -1,4 +1,6 @@
 ﻿using Northwind.DataModels;
+using Northwind.DataModels.Employees;
+using Northwind.DataModels.Location;
 using Northwind.DataModels.Shipment;
 using System.Collections.Generic;
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Northwind.Portal.Models;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 

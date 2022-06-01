@@ -9,37 +9,33 @@
 <hr />
 <p>All fields marked with an asterix are required.</p>
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+             @await Html.PartialAsync("_ModelStateErrorsPartial")
+
             <div class="row">
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerName" class="control-label"></label>
                     <input asp-for="Customer.CustomerName" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerContactName" class="control-label"></label>
                     <input asp-for="Customer.CustomerContactName" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerContactName" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerContactTitle" class="control-label"></label>
                     <input asp-for="Customer.CustomerContactTitle" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerContactTitle" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerAddress" class="control-label"></label>
                     <input asp-for="Customer.CustomerAddress" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerAddress" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerCountry" class="control-label"></label>
                     <input asp-for="Customer.CustomerCountry" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerCountry" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerCity" class="control-label"></label>
                     <input asp-for="Customer.CustomerCity" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerCity" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.RegionId" class="control-label"></label><br />
@@ -47,22 +43,18 @@
                         asp-items="@(new SelectList(Model.Regions, nameof(RegionDto.RegionId), nameof(RegionDto.RegionDescription)))">
                         <option>Please select one</option>
                     </select>
-                    <span asp-validation-for="Customer.RegionId" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerPostalCode" class="control-label"></label>
                     <input asp-for="Customer.CustomerPostalCode" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerPostalCode" class="text-danger"></span>
                 </div>              
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerPhone" class="control-label"></label>
                     <input asp-for="Customer.CustomerPhone" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerPhone" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerFax" class="control-label"></label>
                     <input asp-for="Customer.CustomerFax" class="form-control" />
-                    <span asp-validation-for="Customer.CustomerFax" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">

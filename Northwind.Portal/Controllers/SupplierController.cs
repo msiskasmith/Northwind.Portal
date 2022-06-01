@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Northwind.DataModels;
+using Northwind.DataModels.Products;
 using Northwind.Portal.DataAccess;
 using Northwind.Portal.Models;
 using System.Collections.Generic;
@@ -81,9 +82,13 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result, 
                     "Supplier Not Added", NotificationType.error);
+
+                CreateObjectCookie("SupplierDtoCookie", supplierViewModel.Supplier);
+
+                return Redirect($"/Suppler/Create?supplierId={supplierViewModel.Supplier.SupplierId}");
             }
 
-            CreateObjectCookie("SupplierDtoCookie", supplierViewModel.Supplier);
+            supplierViewModel = await GetSupplierViewModel(supplierViewModel.Supplier);
 
             return View(supplierViewModel);
         }
@@ -119,9 +124,12 @@ namespace Northwind.Portal.Controllers
 
                 NotifyUser(response.Content.ReadAsStringAsync().Result,
                 "Supplier Update Failed", NotificationType.error);
+
+                return Redirect($"/Supplier/Update?supplierId={supplierViewModel.Supplier.SupplierId}");
             }
 
-            return Redirect($"/Supplier/Update?supplierId={supplierViewModel.Supplier.SupplierId}");
+            supplierViewModel = await GetSupplierViewModel(supplierViewModel.Supplier);
+            return View(supplierViewModel);
         }
 
         public async Task<IActionResult> Delete([FromQuery] short supplierId)
@@ -159,6 +167,22 @@ namespace Northwind.Portal.Controllers
                 "SupplierDtoCookie", supplierDto);
 
             return supplierDto;
+        }
+
+        public async Task<SupplierViewModel> GetSupplierViewModel(SupplierDto supplier = null)
+        {
+            if (supplier == null)
+            {
+                supplier = GetSupplierObject();
+            }
+
+            var supplierViewModel = new SupplierViewModel()
+            {
+                Supplier = supplier,
+                Regions = await _regionData.GetRegionsAsync(),
+            };
+
+            return supplierViewModel;
         }
     }
 }
