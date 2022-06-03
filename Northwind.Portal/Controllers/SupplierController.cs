@@ -1,14 +1,9 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Northwind.DataModels;
 using Northwind.DataModels.Products;
 using Northwind.Portal.DataAccess;
 using Northwind.Portal.Models;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;

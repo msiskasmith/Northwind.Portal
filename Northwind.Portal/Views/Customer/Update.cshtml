@@ -1,7 +1,7 @@
 ﻿@model Northwind.Portal.Models.CustomerViewModel
 
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "Update Customer";
 }
 
 <h3>Update Customer</h3>
@@ -13,52 +13,48 @@
             @await Html.PartialAsync("_ModelStateErrorsPartial")
 
             <div class="row">
-                <div class="col-md-4 form-group d-none">
-                    <label asp-for="Customer.CustomerId" class="control-label"></label>
-                    <input asp-for="Customer.CustomerId" class="form-control" />
-                </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Customer.CustomerName" class="control-label"></label>
+                    <label asp-for="Customer.CustomerName" class="control-label">Customer Name<span class="text-danger">*</span></label>
                     <input asp-for="Customer.CustomerName" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Customer.CustomerContactName" class="control-label"></label>
+                    <label asp-for="Customer.CustomerContactName" class="control-label">Contact Name<span class="text-danger">*</span></label>
                     <input asp-for="Customer.CustomerContactName" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Customer.CustomerContactTitle" class="control-label"></label>
+                    <label asp-for="Customer.CustomerContactTitle" class="control-label">Contact Title<span class="text-danger">*</span></label>
                     <input asp-for="Customer.CustomerContactTitle" class="form-control" />
-                </div>
-                <div class="col-md-4 form-group">
-                    <label asp-for="Customer.CustomerFax" class="control-label"></label>
-                    <input asp-for="Customer.CustomerFax" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerAddress" class="control-label"></label>
                     <input asp-for="Customer.CustomerAddress" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
+                    <label asp-for="Customer.CustomerCountry" class="control-label"></label>
+                    <input asp-for="Customer.CustomerCountry" class="form-control" />
+                </div>
+                <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerCity" class="control-label"></label>
                     <input asp-for="Customer.CustomerCity" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Customer.RegionId" class="control-label"></label><br />
-                    <select asp-for="Customer.RegionId" 
+                    <label asp-for="Customer.RegionId" class="control-label">Region<span class="text-danger">*</span></label><br />
+                    <select asp-for="Customer.RegionId" class="form-control"
                         asp-items="@(new SelectList(Model.Regions, nameof(RegionDto.RegionId), nameof(RegionDto.RegionDescription)))">
-                        <option>Please select one</option>
+                        <option value=null>Please select one</option>
                     </select>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerPostalCode" class="control-label"></label>
                     <input asp-for="Customer.CustomerPostalCode" class="form-control" />
-                </div>
-                <div class="col-md-4 form-group">
-                    <label asp-for="Customer.CustomerCountry" class="control-label"></label>
-                    <input asp-for="Customer.CustomerCountry" class="form-control" />
-                </div>
+                </div>              
                 <div class="col-md-4 form-group">
                     <label asp-for="Customer.CustomerPhone" class="control-label"></label>
                     <input asp-for="Customer.CustomerPhone" class="form-control" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Customer.CustomerFax" class="control-label"></label>
+                    <input asp-for="Customer.CustomerFax" class="form-control" />
                 </div>
             </div>
             <div class="form-group">

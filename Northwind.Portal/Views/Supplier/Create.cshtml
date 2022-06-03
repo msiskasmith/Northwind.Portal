@@ -13,15 +13,15 @@
 
             <div class="row">
                 <div class="col-md-4 form-group">
-                    <label asp-for="Supplier.SupplierName" class="control-label"></label>
+                    <label asp-for="Supplier.SupplierName" class="control-label">Supplier Name<span class="text-danger">*</span></label>
                     <input asp-for="Supplier.SupplierName" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Supplier.SupplierContactName" class="control-label"></label>
+                    <label asp-for="Supplier.SupplierContactName" class="control-label">Contact Name<span class="text-danger">*</span></label>
                     <input asp-for="Supplier.SupplierContactName" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Supplier.SupplierContactTitle" class="control-label"></label>
+                    <label asp-for="Supplier.SupplierContactTitle" class="control-label">Contact Title<span class="text-danger">*</span></label>
                     <input asp-for="Supplier.SupplierContactTitle" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
@@ -33,8 +33,8 @@
                     <input asp-for="Supplier.SupplierCity" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Supplier.RegionId" class="control-label"></label><br />
-                    <select asp-for="Supplier.RegionId"
+                    <label asp-for="Supplier.RegionId" class="control-label">Region<span class="text-danger">*</span></label><br />
+                    <select asp-for="Supplier.RegionId" class="form-control"
                         asp-items="@(new SelectList(Model.Regions, nameof(RegionDto.RegionId), nameof(RegionDto.RegionDescription)))">
                         <option value= null>Please select one</option>
                     </select>

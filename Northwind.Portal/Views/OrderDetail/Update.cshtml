@@ -19,29 +19,25 @@
                 <label asp-for="OrderDetail.OrderId" class="control-label"></label>
                 <input asp-for="OrderDetail.OrderId" class="form-control" />
             </div>
-            <div class="form-group d-none">
-                <label asp-for="OrderDetail.OrderDetailId" class="control-label"></label>
-                <input asp-for="OrderDetail.OrderDetailId" class="form-control" />
-            </div>
             <div class="col-md-4 form-group">
-                    <label asp-for="OrderDetail.Product.ProductName" class="control-label"></label><br />
-                    <select asp-for="OrderDetail.ProductId" 
+                    <label asp-for="OrderDetail.Product.ProductName" class="control-label">Product<span class="text-danger">*</span></label><br />
+                    <select asp-for="OrderDetail.ProductId" class="form-control" onchange=""
                         asp-items="@(new SelectList(Model.Products, nameof(ProductDto.ProductId), nameof(ProductDto.ProductName)))">
-                        <option value = null>Please select one</option>
+                        <option value=null>Please select one</option>
                     </select>
                 </div>
-            <div class="form-group">
-                <label asp-for="OrderDetail.OrderUnitPrice" class="control-label"></label>
-                <input asp-for="OrderDetail.OrderUnitPrice" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderDetail.OrderQuantity" class="control-label"></label>
-                <input asp-for="OrderDetail.OrderQuantity" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderDetail.OrderDiscount" class="control-label"></label>
-                <input asp-for="OrderDetail.OrderDiscount" class="form-control" />
-            </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="OrderDetail.OrderUnitPrice" class="control-label disabled">Unit Price<span class="text-danger">*</span></label>
+                    <input asp-for="OrderDetail.OrderUnitPrice" class="form-control" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="OrderDetail.OrderQuantity" class="control-label">Quantity<span class="text-danger">*</span></label>
+                    <input asp-for="OrderDetail.OrderQuantity" class="form-control" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="OrderDetail.OrderDiscount" class="control-label">Discount<span class="text-danger">*</span></label>
+                    <input asp-for="OrderDetail.OrderDiscount" class="form-control" />
+                </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary"/>
                 <a class="btn btn-secondary" href="/OrderDetail?orderId=@Model.OrderDetail.OrderId">Back</a>

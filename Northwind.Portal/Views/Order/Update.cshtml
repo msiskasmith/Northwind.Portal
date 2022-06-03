@@ -12,24 +12,27 @@
 
              @await Html.PartialAsync("_ModelStateErrorsPartial")
 
-            <div class="row">
-                <div class="col-md-4 form-group d-none">
-                    <label asp-for="Order.OrderId" class="control-label"></label>
-                    <input asp-for="Order.OrderId" class="form-control" />
-                </div>
+             <div class="row">
                 <div class="col-md-4 form-group">
-                    <label asp-for="Order.Customer.CustomerName" class="control-label"></label><br />
-                    <select asp-for="Order.CustomerId" 
+                    <label asp-for="Order.Customer.CustomerName" class="control-label">Customer Name<span class="text-danger">*</span></label><br />
+                    <select asp-for="Order.CustomerId" class="form-control"
                         asp-items="@(new SelectList(Model.Customers, nameof(CustomerDto.CustomerId), nameof(CustomerDto.CustomerName)))">
-                        <option>Please select one</option>
+                        <option value= null>Please select one</option>
                     </select>
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Order.OrderDate" class="control-label"></label>
+                    <label>Assigned to<span class="text-danger">*</span></label><br />
+                    <select asp-for="Order.EmployeeId" class="form-control"
+                        asp-items="@(new SelectList(Model.Employees, nameof(EmployeeDto.EmployeeId), nameof(EmployeeDto.EmployeeFirstName)))">
+                        <option value= null>Please select one</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                    <label asp-for="Order.OrderDate" class="control-label">Order Date<span class="text-danger">*</span></label>
                     <input asp-for="Order.OrderDate" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Order.OrderRequiredDate" class="control-label"></label>
+                    <label asp-for="Order.OrderRequiredDate" class="control-label">Required Date<span class="text-danger">*</span></label>
                     <input asp-for="Order.OrderRequiredDate" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
@@ -37,25 +40,15 @@
                     <input asp-for="Order.OrderShippedDate" class="form-control" />
                 </div>
                 <div class="col-md-4 form-group">
-                    <label asp-for="Order.Shipper" class="control-label"></label><br />
-                    <select asp-for="Order.ShipperId" 
+                    <label asp-for="Order.Shipper.ShipperName" class="control-label">Shipper Name<span class="text-danger">*</span></label><br />
+                    <select asp-for="Order.ShipperId" class="form-control"
                         asp-items="@(new SelectList(Model.Shippers, nameof(ShipperDto.ShipperId), nameof(ShipperDto.ShipperName)))">
-                        <option>Please select one</option>
+                        <option value=null>Please select one</option>
                     </select>
                 </div>
-
-                <div class="col-md-4 form-group">
-                    <label asp-for="Order.Employee" class="control-label"></label><br />
-                    <select asp-for="Order.EmployeeId" 
-                        asp-items="@(new SelectList(Model.Employees, nameof(EmployeeDto.EmployeeId), nameof(EmployeeDto.EmployeeFirstName)))">
-                        <option>Please select one</option>
-                    </select>
-                </div>
-
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderFreight" class="control-label"></label>
                     <input asp-for="Order.OrderFreight" class="form-control" />
-                    <span asp-validation-for="Order.OrderFreight" class="text-danger"></span>
                 </div>
                 <div class="col-md-4 form-group">
                     <label asp-for="Order.OrderShipName" class="control-label"></label>
@@ -70,10 +63,10 @@
                     <input asp-for="Order.OrderShipCity" class="form-control" />
                 </div>
                    <div class="col-md-4 form-group">
-                    <label asp-for="Order.ShipRegion.RegionDescription" class="control-label"></label><br />
-                    <select asp-for="Order.ShipRegionId" 
+                    <label asp-for="Order.ShipRegion.RegionDescription" class="control-label">Region<span class="text-danger">*</span></label><br />
+                    <select asp-for="Order.ShipRegionId" class="form-control"
                         asp-items="@(new SelectList(Model.ShipRegions, nameof(RegionDto.RegionId), nameof(RegionDto.RegionDescription)))">
-                        <option>Please select one</option>
+                        <option value=null>Please select a region</option>
                     </select>
                 </div>
                 <div class="col-md-4 form-group">
