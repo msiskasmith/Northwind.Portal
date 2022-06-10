@@ -8,11 +8,18 @@
 	<ItemGroup>
 		<PackageReference Include="DataTables.AspNetCore.Mvc" Version="1.4.2" />
 		<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.17" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.17" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="Northwind.DataModels" Version="1.3.3" />
+		<PackageReference Include="Northwind.DataModels" Version="1.3.5" />
 		<PackageReference Include="System.Linq.Dynamic.3.5" Version="1.0.0" />
 		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
 	</ItemGroup>

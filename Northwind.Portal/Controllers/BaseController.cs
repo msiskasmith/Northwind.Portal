@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using Northwind.Portal.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
 
 namespace Northwind.Portal.Controllers
 {
