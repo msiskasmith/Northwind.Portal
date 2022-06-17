@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -8,6 +9,7 @@ using System.Diagnostics;
 
 namespace Northwind.Portal.Controllers
 {
+    [Authorize]
     public class BaseController : Controller
     {
         public void NotifyUser(string message, string notificationTitle, NotificationType notificationType = NotificationType.success)

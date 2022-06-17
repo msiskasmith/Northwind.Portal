@@ -45,6 +45,7 @@ namespace Northwind.Portal
             services.AddScoped<IRegionData, RegionData>();
             services.AddScoped<IShipperData, ShipperData>();
             services.AddScoped<ISupplierData, SupplierData>();
+            services.AddScoped<IUserData, UserData>();
 
             services.AddSingleton<ILogger>(provider =>
                 provider.GetRequiredService<ILogger<Startup>>());
@@ -61,9 +62,15 @@ namespace Northwind.Portal
                 .AddXmlSerializerFormatters();
 
             services.AddHttpClient();
+
             services.AddHttpClient("northwindconnection", (sp, c) =>
             {
                 c.BaseAddress = new Uri(Configuration.GetValue<string>("apiLocation"));
+            });
+
+            services.AddHttpClient("identityconnection", (sp, c) =>
+            {
+                c.BaseAddress = new Uri(Configuration.GetValue<string>("identityLocation"));
             });
 
             services.Configure<CookiePolicyOptions>(options =>
