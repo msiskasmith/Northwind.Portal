@@ -45,7 +45,6 @@ namespace Northwind.Portal
             services.AddScoped<IRegionData, RegionData>();
             services.AddScoped<IShipperData, ShipperData>();
             services.AddScoped<ISupplierData, SupplierData>();
-            services.AddScoped<IUserData, UserData>();
 
             services.AddSingleton<ILogger>(provider =>
                 provider.GetRequiredService<ILogger<Startup>>());
@@ -61,16 +60,13 @@ namespace Northwind.Portal
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
                 .AddXmlSerializerFormatters();
 
+            services.AddRazorPages();
+
             services.AddHttpClient();
 
             services.AddHttpClient("northwindconnection", (sp, c) =>
             {
                 c.BaseAddress = new Uri(Configuration.GetValue<string>("apiLocation"));
-            });
-
-            services.AddHttpClient("identityconnection", (sp, c) =>
-            {
-                c.BaseAddress = new Uri(Configuration.GetValue<string>("identityLocation"));
             });
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -129,9 +125,12 @@ namespace Northwind.Portal
                         var data = await response.Content.ReadAsStringAsync();
                         var user = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
 
+                        var claims = user.RootElement.EnumerateArray();
 
-                        context.RunClaimActions(user.RootElement);
-
+                        foreach(var claim in claims)
+                        {
+                            context.Identity.AddClaim(new Claim(claim.GetProperty("type").ToString(), claim.GetProperty("value").ToString()));
+                        }
                     },
                     OnRemoteFailure = context =>
                     {
